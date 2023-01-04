@@ -3,19 +3,66 @@ import Phaser from 'phaser';
 class MenuScene extends Phaser.Scene {
   create() {
     // Box
-    this.add.rectangle(640, 360, 1240, 680, 0x000000, 0).setStrokeStyle(3, 0x6d3e4b);
+    this.add.rectangle(200, 580, 300, 150, 0x000000, 0).setStrokeStyle(4, 0x6d3e4b);
+    this.add.rectangle(200, 580, 292, 142, 0xfd897b, 1);
 
-    // Label touch to start
-    this.add.text(340, 360, 'ok', {
+    // Logo
+    this.add.text(700, 600, 'Bird Banking Frenzy!!', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
-      fontStyle: 'bold',
-      fontSize: 50,
+      fontSize: 44,
       align: 'center',
       fixedWidth: 600,
-      color: '#ffffff',
-      stroke: '#6d3e4b',
-      strokeThickness: 3,
+      color: '#6d3e4b',
     });
+
+    // Wings menu pointer
+    const wings = this.add.circle(300, -100, 20, 0xffffff);
+
+    // Play
+    this.add.text(50, 530, 'Play', {
+      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
+      fontSize: 40,
+      align: 'center',
+      fixedWidth: 300,
+      color: '#6d3e4b',
+    });
+
+    // Play Button
+    const playBtn = this.add.rectangle(200, 550, 292, 50, 0xffffff, 0);
+    playBtn.setInteractive({ usehandCursor: true })
+      .on('pointerover', () => {
+        wings.x = 260;
+        wings.y = 550;
+      })
+      .on('pointerout', () => {
+        wings.y = -100;
+      })
+      .on('pointerdown', () => {
+        //
+      });
+
+    // Credits
+    this.add.text(50, 585, 'Credits', {
+      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
+      fontSize: 40,
+      align: 'center',
+      fixedWidth: 300,
+      color: '#6d3e4b',
+    });
+
+    // Credits Button
+    const creditsBtn = this.add.rectangle(200, 605, 292, 50, 0xffffff, 0);
+    creditsBtn.setInteractive({ usehandCursor: true })
+      .on('pointerover', () => {
+        wings.x = 290;
+        wings.y = 605;
+      })
+      .on('pointerout', () => {
+        wings.y = -100;
+      })
+      .on('pointerdown', () => {
+        //
+      });
   }
 }
 
