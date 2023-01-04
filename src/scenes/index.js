@@ -1,33 +1,22 @@
 import Phaser from 'phaser';
 
+import MenuScene from './menu';
+
 class IndexScene extends Phaser.Scene {
-  loadingText = null;
-
   preload() {
-    // Background
-    const background = this.add.graphics();
-    background.fillStyle(0xfbd6aa);
-    background.fillRect(0, 0, 1280, 720);
-
-    // Loading text
-    this.loadingText = this.add.text(540, 350, 'Loading...', {
-      fontFamily: 'Arial, Helvetica, sans-serif',
-      fontSize: 24,
-      align: 'center',
-      fixedWidth: 200,
-      color: '#6d3e4b',
-    });
-
     // Google Fonts
     this.load.rexWebFont({
       google: { families: ['Zen Maru Gothic', 'VT323'] },
       testString: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 1234567890 !@#$%^&*()-_=+[{]}\\|;:\'",<.>/?',
     });
+
+    // Scenes
+    this.scene.add('menu', MenuScene);
   }
 
   create() {
-    // Remove Loading... text
-    this.loadingText.destroy();
+    // Box
+    this.add.rectangle(640, 360, 1240, 680, 0x000000, 0).setStrokeStyle(3, 0x6d3e4b);
 
     // Label touch to start
     const touchText = this.add.text(340, 450, 'TOUCH TO START', {
@@ -36,9 +25,7 @@ class IndexScene extends Phaser.Scene {
       fontSize: 50,
       align: 'center',
       fixedWidth: 600,
-      color: '#ffffff',
-      stroke: '#6d3e4b',
-      strokeThickness: 3,
+      color: '#6d3e4b',
     });
 
     // Animate
@@ -52,7 +39,7 @@ class IndexScene extends Phaser.Scene {
 
     // Start game on touch
     this.input.once('pointerdown', () => {
-      // this.scene.start('menu');
+      this.scene.start('menu');
     });
   }
 }

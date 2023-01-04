@@ -11,6 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background:#6d3e4b;
 }
 
 #container {
@@ -30,5 +31,4 @@ body {
 canvas {
   position: relative;
   z-index: 5;
-  box-shadow: 0px 0px 10px #aaccee, 0px 0px 10px #aaccee, 0px 0px 20px #aaccee;
 }
