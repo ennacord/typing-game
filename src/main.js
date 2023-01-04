@@ -1,5 +1,6 @@
 import './style.css';
 import Phaser from 'phaser';
+import plugins from './plugins';
 
 // Phaser Game Instance
 // eslint-disable-next-line no-new
@@ -15,6 +16,7 @@ new Phaser.Game({
     width: 1280,
     height: 720,
   },
+  plugins,
   scene: {
     create() {
       // eslint-disable-next-line no-console
