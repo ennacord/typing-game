@@ -12,6 +12,15 @@ class PlayScene extends Phaser.Scene {
       .lineStyle(3, 0x6d3e4b)
       .strokeRoundedRect(0, 0, 900, 640, 20);
 
+    // Enna
+    this.anims.create({
+      key: 'idle',
+      frames: this.anims.generateFrameNumbers('enna', { start: 0, end: 1 }),
+      frameRate: 2,
+      repeat: -1,
+    });
+    this.add.sprite(300, 450, 'enna').play('idle');
+
     // Level
     this.add.graphics({ x: 970, y: 60 })
       .fillStyle(0x6fbd6aa)

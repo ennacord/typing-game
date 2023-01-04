@@ -4,6 +4,8 @@ import MenuScene from './menu';
 import CreditsScene from './credits';
 import PlayScene from './play';
 
+import EnnaSprite from '../assets/enna-sprite.png';
+
 class IndexScene extends Phaser.Scene {
   preload() {
     // Google Fonts
@@ -11,6 +13,9 @@ class IndexScene extends Phaser.Scene {
       google: { families: ['Zen Maru Gothic', 'VT323'] },
       testString: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 1234567890 !@#$%^&*()-_=+[{]}\\|;:\'",<.>/?',
     });
+
+    // Assets
+    this.load.spritesheet('enna', EnnaSprite, { frameWidth: 300, frameHeight: 300 });
 
     // Scenes
     this.scene.add('menu', MenuScene);
