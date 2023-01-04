@@ -43,7 +43,7 @@ class MenuScene extends Phaser.Scene {
       .once('pointerdown', () => {
         playBtn.destroy();
         creditsBtn.destroy();
-        this.scene.start('play');
+        this.scene.start('intro');
       });
 
     // Credits

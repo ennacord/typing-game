@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 import MenuScene from './menu';
 import CreditsScene from './credits';
+import IntroScene from './intro';
 import PlayScene from './play';
 
 import EnnaSprite from '../assets/enna-sprite.png';
@@ -20,6 +21,7 @@ class IndexScene extends Phaser.Scene {
     // Scenes
     this.scene.add('menu', MenuScene);
     this.scene.add('credits', CreditsScene);
+    this.scene.add('intro', IntroScene);
     this.scene.add('play', PlayScene);
   }
 
