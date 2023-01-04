@@ -1,5 +1,6 @@
 import './style.css';
 import Phaser from 'phaser';
+import scene from './scenes';
 import plugins from './plugins';
 
 // Phaser Game Instance
@@ -17,10 +18,5 @@ new Phaser.Game({
     height: 720,
   },
   plugins,
-  scene: {
-    create() {
-      // eslint-disable-next-line no-console
-      console.log('game start!');
-    },
-  },
+  scene,
 });
