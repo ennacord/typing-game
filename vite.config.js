@@ -14,7 +14,6 @@ export default defineConfig({
   build: {
     outDir: '../docs',
     assetsInlineLimit: 0,
-    minify: 'terser',
   },
   plugins: [
   ],
