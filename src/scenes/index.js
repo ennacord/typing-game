@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import MenuScene from './menu';
+import CreditsScene from './credits';
 
 class IndexScene extends Phaser.Scene {
   preload() {
@@ -12,6 +13,7 @@ class IndexScene extends Phaser.Scene {
 
     // Scenes
     this.scene.add('menu', MenuScene);
+    this.scene.add('credits', CreditsScene);
   }
 
   create() {

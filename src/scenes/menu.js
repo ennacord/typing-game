@@ -29,7 +29,7 @@ class MenuScene extends Phaser.Scene {
 
     // Play Button
     const playBtn = this.add.rectangle(200, 550, 292, 50, 0xffffff, 0);
-    playBtn.setInteractive({ usehandCursor: true })
+    playBtn.setInteractive({ useHandCursor: true })
       .on('pointerover', () => {
         wings.x = 260;
         wings.y = 550;
@@ -52,7 +52,7 @@ class MenuScene extends Phaser.Scene {
 
     // Credits Button
     const creditsBtn = this.add.rectangle(200, 605, 292, 50, 0xffffff, 0);
-    creditsBtn.setInteractive({ usehandCursor: true })
+    creditsBtn.setInteractive({ useHandCursor: true })
       .on('pointerover', () => {
         wings.x = 290;
         wings.y = 605;
@@ -61,7 +61,7 @@ class MenuScene extends Phaser.Scene {
         wings.y = -100;
       })
       .on('pointerdown', () => {
-        //
+        this.scene.start('credits');
       });
   }
 }
