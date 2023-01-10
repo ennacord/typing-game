@@ -6,6 +6,8 @@ import IntroScene from './intro';
 import PlayScene from './play';
 
 import EnnaSprite from '../assets/enna-sprite.png';
+import UIpng from '../assets/ui.png';
+import UIjson from '../assets/ui.json';
 
 class IndexScene extends Phaser.Scene {
   preload() {
@@ -17,6 +19,7 @@ class IndexScene extends Phaser.Scene {
 
     // Assets
     this.load.spritesheet('enna', EnnaSprite, { frameWidth: 300, frameHeight: 300 });
+    this.load.atlas('ui', UIpng, UIjson);
 
     // Scenes
     this.scene.add('menu', MenuScene);

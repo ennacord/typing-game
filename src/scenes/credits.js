@@ -6,7 +6,7 @@ class CreditsScene extends Phaser.Scene {
     this.add.rectangle(640, 360, 1240, 680, 0x000000, 0).setStrokeStyle(3, 0x6d3e4b);
 
     // Back
-    this.add.circle(60, 60, 20, 0xffffff);
+    this.add.sprite(65, 60, 'ui', 'wings').setScale(0.4);
     this.add.text(95, 45, 'Back', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
       fontSize: 30,
@@ -23,13 +23,7 @@ class CreditsScene extends Phaser.Scene {
       });
 
     // Logo
-    this.add.text(340, 250, 'Bird Banking Frenzy!!', {
-      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
-      fontSize: 30,
-      align: 'center',
-      fixedWidth: 600,
-      color: '#6d3e4b',
-    });
+    this.add.sprite(640, 170, 'ui', 'logo').setScale(0.45);
 
     // Credits
     this.add.text(340, 280, 'CREDITS', {
@@ -57,8 +51,8 @@ class CreditsScene extends Phaser.Scene {
     });
 
     // Contributors
-    this.add.circle(150, 400, 48, 0x000000, 0).setStrokeStyle(1, 0x6d3e4b);
-    this.add.circle(150, 400, 40, 0x6d3e4b, 1);
+    this.add.sprite(150, 400, 'ui', 'frame').setScale(0.66);
+    this.add.sprite(150, 400, 'ui', 'av_hazel').setScale(0.4);
     this.add.text(220, 370, 'Hazel @HazelSokolov', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
       fontSize: 30,
@@ -70,8 +64,8 @@ class CreditsScene extends Phaser.Scene {
       color: '#6d3e4b',
     });
 
-    this.add.circle(150, 510, 48, 0x000000, 0).setStrokeStyle(1, 0x6d3e4b);
-    this.add.circle(150, 510, 40, 0x6d3e4b, 1);
+    this.add.sprite(150, 510, 'ui', 'frame').setScale(0.66);
+    this.add.sprite(150, 510, 'ui', 'av_jetrico').setScale(0.4);
     this.add.text(220, 480, 'jetrico @jetri_co', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
       fontSize: 30,
@@ -83,8 +77,8 @@ class CreditsScene extends Phaser.Scene {
       color: '#6d3e4b',
     });
 
-    this.add.circle(150, 620, 48, 0x000000, 0).setStrokeStyle(1, 0x6d3e4b);
-    this.add.circle(150, 620, 40, 0x6d3e4b, 1);
+    this.add.sprite(150, 620, 'ui', 'frame').setScale(0.66);
+    this.add.sprite(150, 620, 'ui', 'av_mata').setScale(0.4);
     this.add.text(220, 590, 'Matahari @mataharigoreng', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
       fontSize: 30,

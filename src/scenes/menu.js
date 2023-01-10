@@ -7,16 +7,10 @@ class MenuScene extends Phaser.Scene {
     this.add.rectangle(200, 580, 292, 142, 0xfd897b, 1);
 
     // Logo
-    this.add.text(700, 600, 'Bird Banking Frenzy!!', {
-      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
-      fontSize: 44,
-      align: 'center',
-      fixedWidth: 600,
-      color: '#6d3e4b',
-    });
+    this.add.sprite(1000, 550, 'ui', 'logo').setScale(0.5);
 
     // Wings menu pointer
-    const wings = this.add.circle(300, -100, 20, 0xffffff);
+    const wings = this.add.sprite(300, -100, 'ui', 'wings').setScale(0.4);
 
     // Play
     this.add.text(50, 530, 'Play', {

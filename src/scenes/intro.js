@@ -1,11 +1,11 @@
 import Phaser from 'phaser';
 
 const INTRO_DIALOG = [
-  'I have no money...',
-  'Birds Banking Frenzy!! is a game produced in Enna\'s Angelic Teahouse.',
-  'It is a typing game about Enna Alouette receiving red packets from her senpais.',
-  'We hope you enjoy the short project.',
-  'Happy Lunar New Year!',
+  '(Thinking of Taco)',
+  'I have no money in my bank...',
+  '(Thought of Lightbulb + Exclamation Mark)',
+  'Its Lunar New Year...',
+  'Lets get some bank from my senpais!',
 ];
 
 class IntroScene extends Phaser.Scene {
@@ -22,10 +22,15 @@ class IntroScene extends Phaser.Scene {
     });
     this.add.sprite(300, 360, 'enna').setScale(1.4).play('idle');
 
+    // Speech Bubble
+    this.add.sprite(570, 285, 'ui', 'bubble1').setOrigin(0, 0);
+    this.add.sprite(600, 130, 'ui', 'bubble2').setOrigin(0, 0).setScale(-0.5, 0.5);
+    this.add.sprite(515, 155, 'ui', 'taco').setOrigin(0, 0).setScale(0.6);
+
     // Dialog Text
     this.dialogTxt = this.add.text(600, 300, '', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
-      fontSize: 40,
+      fontSize: 38,
       align: 'left',
       fixedWidth: 700,
       color: '#6d3e4b',
