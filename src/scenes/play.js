@@ -139,7 +139,7 @@ class PlayScene extends Phaser.Scene {
     this.timeLeft = 300;
     this.coin = 100;
     this.difficulty = 'easy';
-    this.diffMult = { easy: 1, intermedate: 1.5, hard: 2 };
+    this.diffMult = { easy: 1, intermediate: 1.5, hard: 2 };
     this.senpai = 0;
     this.currentPhrase = '';
     this.targetPhrase = '';
@@ -263,7 +263,7 @@ class PlayScene extends Phaser.Scene {
 
   completePhrase() {
     // Give coins
-    const reward = this.targetPhrase.length * this.diffMult[this.difficulty] * 10
+    const reward = this.targetPhrase.length * this.diffMult[this.difficulty] * 10;
     this.coin += reward;
     this.coinTxt.setText(String(this.coin));
 

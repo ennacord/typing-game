@@ -15,14 +15,14 @@ export default {
     'Happy Year of the Rabbit',
     ' Wishing you a prosperous year',
     'Please give me a lot of money',
-    'Thank you for funding my tacos ',
+    'Thank you for funding my tacos',
     'I promise I won\'t go crazy on tacos',
   ],
   hard: [
     'Wishing you lots of luck this Rabbit year!',
     'I hope you earn as many red packets as I get in 2023',
     'Wishing you good luck again and again IN 2023',
-    'The sky is raining in tacos thanks to your money ',
+    'The sky is raining in tacos thanks to your money',
     'Tacos tacos tacos tacos tacos tacos tacos tacos tacos',
   ],
 };
