@@ -148,6 +148,7 @@ class PlayScene extends Phaser.Scene {
     this.coinTxt.setText(String(this.coin));
 
     this.input.keyboard.on('keydown', (e) => {
+      if (!this.targetPhrase) return;
       if (['alt', 'shift', 'control', 'tab', 'enter', 'escape'].indexOf(e.key.toLowerCase()) > -1) return;
       this.currentPhrase += e.key;
       const targetPhrase = this.targetPhrase.toLowerCase();
@@ -173,7 +174,17 @@ class PlayScene extends Phaser.Scene {
       }
     });
 
-    this.newPhrase();
+    // Transition first senpai
+    this.senpaiArt = this.add.sprite(820, 520, 'enna').setScale(-0.7, 0.7).play('idle');
+    this.tweens.add({
+      targets: [this.senpaiArt],
+      x: { from: this.senpaiArt.x, to: this.senpaiArt.x - 40 },
+      alpha: { from: 0, to: 1 },
+      duration: 2000,
+      onComplete: () => {
+        this.newPhrase();
+      },
+    });
   }
 
   tick() {
@@ -194,11 +205,6 @@ class PlayScene extends Phaser.Scene {
   }
 
   newPhrase() {
-    // Resets
-    this.currentPhrase = '';
-    this.sayText.setText('');
-
-    // New target phrase
     const phrasePool = PHRASES[this.difficulty];
     this.targetPhrase = phrasePool[Math.floor(Math.random() * phrasePool.length)];
     this.mainText.setText(this.targetPhrase);
@@ -244,12 +250,15 @@ class PlayScene extends Phaser.Scene {
   }
 
   senpaiChange() {
+    // Pause during senpai change
+    if (this.timer) this.timer.paused = true;
+
     // Next senpai
     this.senpai += 1;
     this.senpaiTxt.setText(String(this.senpai + 1));
 
-    // Senpai art
-    console.log(SENPAIS[this.senpai].key);
+    // Notice
+    this.mainText.setText(`Senpai: ${SENPAIS[this.senpai].name}`);
 
     // Change difficulty based on senpai
     if (this.senpai < 4) {
@@ -259,9 +268,38 @@ class PlayScene extends Phaser.Scene {
     } else {
       this.difficulty = 'hard';
     }
+
+    // Change senpai art
+    if (this.senpaiArt) {
+      this.tweens.add({
+        targets: [this.senpaiArt],
+        x: { from: this.senpaiArt.x, to: this.senpaiArt.x + 40 },
+        alpha: { from: 1, to: 0 },
+        duration: 2000,
+        onComplete: () => {
+          this.senpaiArt.destroy();
+          // SENPAIS[this.senpai].key
+          this.senpaiArt = this.add.sprite(820, 520, 'enna').setScale(-0.7, 0.7).setAlpha(0).play('idle');
+          this.tweens.add({
+            targets: [this.senpaiArt],
+            x: { from: this.senpaiArt.x, to: this.senpaiArt.x - 40 },
+            alpha: { from: 0, to: 1 },
+            duration: 2000,
+            onComplete: () => {
+              this.newPhrase();
+              this.timer.paused = false;
+            },
+          });
+        },
+      });
+    }
   }
 
   completePhrase() {
+    // Resets
+    this.currentPhrase = '';
+    this.sayText.setText('');
+
     // Give coins
     const reward = this.targetPhrase.length * this.diffMult[this.difficulty] * 10;
     this.coin += reward;
@@ -282,10 +320,11 @@ class PlayScene extends Phaser.Scene {
     });
 
     // Senpai cange
-    if (this.coin > (this.senpai + 1) * 1000) this.senpaiChange();
-
-    // Next phrase
-    this.newPhrase();
+    if (this.coin > (this.senpai + 1) * 1000) {
+      this.senpaiChange();
+    } else {
+      this.newPhrase();
+    }
   }
 }
 
