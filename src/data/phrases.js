@@ -13,7 +13,7 @@ export default {
     'I love you (platonically)',
     'Thank you so so much',
     'Happy Year of the Rabbit',
-    ' Wishing you a prosperous year',
+    'Wishing you a prosperous year',
     'Please give me a lot of money',
     'Thank you for funding my tacos',
     'I promise I won\'t go crazy on tacos',

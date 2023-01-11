@@ -43,28 +43,9 @@ class PlayScene extends Phaser.Scene {
       fontSize: 24,
       color: '#6d3e4b',
       align: 'left',
-      fixedWidth: 300,
-      wordWrap: { width: 300, useAdvancedWrap: true },
+      fixedWidth: 270,
+      wordWrap: { width: 270, useAdvancedWrap: true },
     });
-
-    // // Level
-    // this.add.graphics({ x: 970, y: 60 })
-    //   .fillStyle(0x6fbd6aa)
-    //   .fillRoundedRect(0, 0, 280, 80, 20)
-    //   .lineStyle(3, 0x6d3e4b)
-    //   .strokeRoundedRect(0, 0, 280, 80, 20);
-    // this.add.text(1000, 78, 'LEVEL', {
-    //   fontFamily: 'VT323, Arial, Helvetica, sans-serif',
-    //   fontSize: 40,
-    //   color: '#6d3e4b',
-    // });
-    // this.levelTxt = this.add.text(1090, 70, '05', {
-    //   fontFamily: 'VT323, Arial, Helvetica, sans-serif',
-    //   fontSize: 54,
-    //   align: 'center',
-    //   fixedWidth: 140,
-    //   color: '#6d3e4b',
-    // });
 
     // Box: Time
     this.add.graphics({ x: 970, y: 170 })
@@ -117,30 +98,39 @@ class PlayScene extends Phaser.Scene {
       color: '#6d3e4b',
     });
 
-    // // Box: Power Up
-    // this.add.graphics({ x: 970, y: 500 })
-    //   .fillStyle(0x6fbd6aa)
-    //   .fillRoundedRect(0, 0, 280, 150, 20)
-    //   .lineStyle(3, 0x6d3e4b)
-    //   .strokeRoundedRect(0, 0, 280, 150, 20);
-    // this.add.text(970, 510, 'POWER UP', {
-    //   fontFamily: 'VT323, Arial, Helvetica, sans-serif',
-    //   fontSize: 34,
-    //   color: '#6d3e4b',
-    //   align: 'center',
-    //   fixedWidth: 280,
-    // });
+    // Box: Try Again
+    this.add.graphics({ x: 970, y: 550 })
+      .fillStyle(0x6fbd6aa)
+      .fillRoundedRect(0, 0, 280, 80, 20)
+      .lineStyle(3, 0x6d3e4b)
+      .strokeRoundedRect(0, 0, 280, 80, 20);
+    this.add.text(970, 570, 'Try Again?', {
+      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
+      fontSize: 40,
+      color: '#6d3e4b',
+      align: 'center',
+      fixedWidth: 280,
+    });
+    this.add.rectangle(970, 550, 280, 80, 0x000000, 0)
+      .setOrigin(0, 0)
+      .setInteractive({ useHandCursor: true })
+      .once('pointerdown', () => {
+        this.scene.restart();
+      });
 
     // Start game proper
     this.startGame();
   }
 
   startGame() {
-    this.timeLeft = 300;
+    this.timeLeft = 60;
     this.coin = 100;
     this.difficulty = 'easy';
     this.diffMult = { easy: 1, intermediate: 1.5, hard: 2 };
+    // this.diffTime = { easy: 50, intermediate: 45, hard: 40 };
+    this.diffTime = { easy: 60, intermediate: 60, hard: 60 };
     this.senpai = 0;
+    this.senpaiPhrase = 0;
     this.currentPhrase = '';
     this.targetPhrase = '';
     this.timer = null;
@@ -170,6 +160,8 @@ class PlayScene extends Phaser.Scene {
             callbackScope: this,
             loop: true,
           });
+        } else if (this.timer.paused) {
+          this.timer.paused = false;
         }
       }
     });
@@ -192,7 +184,7 @@ class PlayScene extends Phaser.Scene {
     this.timeTxt.setText(String(this.timeLeft));
 
     // No time remaining
-    if (this.timeLeft < 1) this.endGame();
+    if (this.timeLeft < 1) this.senpaiChange(); // this.endGame();
   }
 
   endGame() {
@@ -202,6 +194,7 @@ class PlayScene extends Phaser.Scene {
     this.input.keyboard.off('keydown');
     // Show score
     this.mainText.setText(`Complete! You earned $${this.coin}!`);
+    this.sayText.setText(`What? Only $${this.coin}?!`);
   }
 
   newPhrase() {
@@ -250,8 +243,16 @@ class PlayScene extends Phaser.Scene {
   }
 
   senpaiChange() {
+    this.targetPhrase = '';
+    this.currentPhrase = '';
+
     // Pause during senpai change
     if (this.timer) this.timer.paused = true;
+
+    if (this.senpai === 10) {
+      this.endGame();
+      return;
+    }
 
     // Next senpai
     this.senpai += 1;
@@ -259,15 +260,23 @@ class PlayScene extends Phaser.Scene {
 
     // Notice
     this.mainText.setText(`Senpai: ${SENPAIS[this.senpai].name}`);
+    this.sayText.setText(`Hi ${SENPAIS[this.senpai].name}!`);
 
     // Change difficulty based on senpai
-    if (this.senpai < 4) {
+    if (this.senpai < 3) {
+      // 0 1 2
       this.difficulty = 'easy';
-    } else if (this.senpai < 8) {
+    } else if (this.senpai < 7) {
+      // 3 4 5 6
       this.difficulty = 'intermediate';
     } else {
+      // 7 8 9 10
       this.difficulty = 'hard';
     }
+
+    // Change difficulty time
+    this.timeLeft = this.diffTime[this.difficulty];
+    this.timeTxt.setText(String(this.timeLeft));
 
     // Change senpai art
     if (this.senpaiArt) {
@@ -287,7 +296,6 @@ class PlayScene extends Phaser.Scene {
             duration: 2000,
             onComplete: () => {
               this.newPhrase();
-              this.timer.paused = false;
             },
           });
         },
@@ -301,7 +309,8 @@ class PlayScene extends Phaser.Scene {
     this.sayText.setText('');
 
     // Give coins
-    const reward = this.targetPhrase.length * this.diffMult[this.difficulty] * 10;
+    // const reward = this.targetPhrase.length * this.diffMult[this.difficulty] * 10;
+    const reward = 200;
     this.coin += reward;
     this.coinTxt.setText(String(this.coin));
 
@@ -320,7 +329,7 @@ class PlayScene extends Phaser.Scene {
     });
 
     // Senpai cange
-    if (this.coin > (this.senpai + 1) * 1000) {
+    if (this.coin >= (this.senpai + 1) * 1000) {
       this.senpaiChange();
     } else {
       this.newPhrase();
