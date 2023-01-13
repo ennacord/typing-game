@@ -5,9 +5,11 @@ import CreditsScene from './credits';
 import IntroScene from './intro';
 import PlayScene from './play';
 
-import EnnaSprite from '../assets/enna-sprite.png';
+import CharactersPng from '../assets/chars.png';
 import UIpng from '../assets/ui.png';
 import UIjson from '../assets/ui.json';
+
+import SENPAIS from '../data/senpais';
 
 class IndexScene extends Phaser.Scene {
   preload() {
@@ -18,7 +20,7 @@ class IndexScene extends Phaser.Scene {
     });
 
     // Assets
-    this.load.spritesheet('enna', EnnaSprite, { frameWidth: 300, frameHeight: 300 });
+    this.load.spritesheet('chars', CharactersPng, { frameWidth: 300, frameHeight: 300 });
     this.load.atlas('ui', UIpng, UIjson);
 
     // Scenes
@@ -28,7 +30,23 @@ class IndexScene extends Phaser.Scene {
     this.scene.add('play', PlayScene);
   }
 
+  setupAnimation(key, start, end) {
+    // console.log('setupAnimation()', key, start, end);
+    this.anims.create({
+      key,
+      frames: this.anims.generateFrameNumbers('chars', { start, end }),
+      frameRate: 2,
+      repeat: -1,
+    });
+  }
+
   create() {
+    // Animations
+    this.setupAnimation('enna', 0, 1);
+    SENPAIS.forEach((senpai, index) => {
+      this.setupAnimation(senpai.key, (index + 1) * 2, ((index + 1) * 2) + 1);
+    });
+
     // Box
     this.add.rectangle(640, 360, 1240, 680, 0x000000, 0).setStrokeStyle(3, 0x6d3e4b);
 

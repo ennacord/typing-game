@@ -14,13 +14,7 @@ class IntroScene extends Phaser.Scene {
     this.add.rectangle(640, 360, 1240, 680, 0x000000, 0).setStrokeStyle(3, 0x6d3e4b);
 
     // Enna
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNumbers('enna', { start: 0, end: 1 }),
-      frameRate: 2,
-      repeat: -1,
-    });
-    this.add.sprite(300, 360, 'enna').setScale(1.4).play('idle');
+    this.add.sprite(300, 360, 'chars').setScale(1.4).play('enna');
 
     // Speech Bubble
     this.add.sprite(570, 285, 'ui', 'bubble1').setOrigin(0, 0);

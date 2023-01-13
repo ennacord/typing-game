@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import SENPAIS from '../data/senpais';
+
 class MenuScene extends Phaser.Scene {
   create() {
     // Box
@@ -11,6 +13,12 @@ class MenuScene extends Phaser.Scene {
 
     // Wings menu pointer
     const wings = this.add.sprite(300, -100, 'ui', 'wings').setScale(0.4);
+
+    // Characters
+    this.add.sprite(150, 50, 'senpais').setScale(0.2).play('enna');
+    SENPAIS.forEach((senpai, index) => {
+      this.add.sprite(240 + (index * 90), 50, 'senpais').setScale(0.2).play(senpai.key);
+    });
 
     // Play
     this.add.text(50, 530, 'Play', {

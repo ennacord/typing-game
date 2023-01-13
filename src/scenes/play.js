@@ -28,17 +28,11 @@ class PlayScene extends Phaser.Scene {
     this.add.sprite(220, 575, 'ui', 'couch').setScale(0.8);
 
     // Enna
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNumbers('enna', { start: 0, end: 1 }),
-      frameRate: 2,
-      repeat: -1,
-    });
-    this.add.sprite(480, 520, 'enna').setScale(0.7).play('idle');
-    this.add.sprite(680, 400, 'ui', 'bubble1').setScale(0.5);
+    this.add.sprite(480, 520, 'chars').setScale(0.7).play('enna');
+    this.add.sprite(680, 380, 'ui', 'bubble1').setScale(0.5);
 
     // Current Text
-    this.sayText = this.add.text(540, 360, '', {
+    this.sayText = this.add.text(540, 340, '', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
       fontSize: 24,
       color: '#6d3e4b',
@@ -167,7 +161,7 @@ class PlayScene extends Phaser.Scene {
     });
 
     // Transition first senpai
-    this.senpaiArt = this.add.sprite(820, 520, 'enna').setScale(-0.7, 0.7).play('idle');
+    this.senpaiArt = this.add.sprite(820, 520, 'enna').setScale(-0.7, 0.7).play('elira');
     this.tweens.add({
       targets: [this.senpaiArt],
       x: { from: this.senpaiArt.x, to: this.senpaiArt.x - 40 },
@@ -287,8 +281,10 @@ class PlayScene extends Phaser.Scene {
         duration: 2000,
         onComplete: () => {
           this.senpaiArt.destroy();
-          // SENPAIS[this.senpai].key
-          this.senpaiArt = this.add.sprite(820, 520, 'enna').setScale(-0.7, 0.7).setAlpha(0).play('idle');
+          this.senpaiArt = this.add.sprite(820, 520, 'chars')
+            .setScale(-0.7, 0.7)
+            .setAlpha(0)
+            .play(SENPAIS[this.senpai].key);
           this.tweens.add({
             targets: [this.senpaiArt],
             x: { from: this.senpaiArt.x, to: this.senpaiArt.x - 40 },
