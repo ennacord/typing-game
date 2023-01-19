@@ -13,16 +13,20 @@ class MenuScene extends Phaser.Scene {
     this.add.rectangle(200, 580, 292, 142, 0xfd897b, 1);
 
     // Logo
-    this.add.sprite(1000, 550, 'ui', 'logo').setScale(0.5);
+    this.add.sprite(1020, 565, 'ui', 'logo').setScale(0.45);
 
     // Wings menu pointer
     const wings = this.add.sprite(300, -100, 'ui', 'wings').setScale(0.4);
 
     // Characters
-    this.add.sprite(150, 50, 'senpais').setScale(0.2).play('enna');
+    this.add.sprite(180, 50, 'senpais').setScale(0.2).play('enna');
     SENPAIS.forEach((senpai, index) => {
       this.add.sprite(240 + (index * 90), 50, 'senpais').setScale(0.2).play(senpai.key);
     });
+
+    this.add.sprite(300, 280, 'clouds').setScale(0.6).play('clouds');
+    this.add.sprite(590, 510, 'enna').setScale(1).play('ennahome');
+    this.add.sprite(1000, 230, 'lantern').setScale(0.6).play('lantern');
 
     // Play
     this.add.text(50, 530, 'Play', {

@@ -6,6 +6,9 @@ import IntroScene from './intro';
 import PlayScene from './play';
 
 import CharactersPng from '../assets/chars.png';
+import CloudsPng from '../assets/clouds.png';
+import EnnaPng from '../assets/enna.png';
+import LanternPng from '../assets/lantern.png';
 import UIpng from '../assets/ui.png';
 import UIjson from '../assets/ui.json';
 
@@ -27,6 +30,15 @@ class IndexScene extends Phaser.Scene {
 
     // Assets
     this.load.spritesheet('chars', CharactersPng, { frameWidth: 300, frameHeight: 300 });
+    this.load.spritesheet('clouds', CloudsPng, {
+      frameWidth: 550, frameHeight: 360, margin: 2, spacing: 4,
+    });
+    this.load.spritesheet('enna', EnnaPng, {
+      frameWidth: 380, frameHeight: 300, margin: 2, spacing: 4,
+    });
+    this.load.spritesheet('lantern', LanternPng, {
+      frameWidth: 590, frameHeight: 360, margin: 2, spacing: 4,
+    });
     this.load.atlas('ui', UIpng, UIjson);
 
     // Audio
@@ -58,6 +70,26 @@ class IndexScene extends Phaser.Scene {
     this.setupAnimation('enna', 0, 1);
     SENPAIS.forEach((senpai, index) => {
       this.setupAnimation(senpai.key, (index + 1) * 2, ((index + 1) * 2) + 1);
+    });
+
+    // Extra Animations
+    this.anims.create({
+      key: 'clouds',
+      frames: this.anims.generateFrameNumbers('clouds', { start: 0, end: 1 }),
+      frameRate: 2,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'ennahome',
+      frames: this.anims.generateFrameNumbers('enna', { start: 0, end: 1 }),
+      frameRate: 2,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'lantern',
+      frames: this.anims.generateFrameNumbers('lantern', { start: 0, end: 1 }),
+      frameRate: 2,
+      repeat: -1,
     });
 
     // Box
