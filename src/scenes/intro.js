@@ -61,6 +61,7 @@ class IntroScene extends Phaser.Scene {
       const targetLine = INTRO_DIALOG[this.currentLine];
       // Text display
       if (targetLine) {
+        this.sound.add('nav', { volume: 0.1 }).play();
         let displayChars = 0;
         this.displayTimer = this.time.addEvent({
           delay: 20,

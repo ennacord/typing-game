@@ -19,6 +19,7 @@ class CreditsScene extends Phaser.Scene {
     const playBtn = this.add.rectangle(130, 60, 200, 50, 0xff0000, 0);
     playBtn.setInteractive({ useHandCursor: true })
       .on('pointerdown', () => {
+        this.sound.add('nav', { volume: 0.4 });
         this.scene.start('menu');
       });
 

@@ -4,6 +4,10 @@ import SENPAIS from '../data/senpais';
 
 class MenuScene extends Phaser.Scene {
   create() {
+    // Don't: common sound instance. it has popping because .play() will stop ongoing playbacks
+    // const clickSound = this.sound.add('nav', { volume: 0.4 });
+    // const hoverSound = this.sound.add('nav', { volume: 0.2 });
+
     // Box
     this.add.rectangle(200, 580, 300, 150, 0x000000, 0).setStrokeStyle(4, 0x6d3e4b);
     this.add.rectangle(200, 580, 292, 142, 0xfd897b, 1);
@@ -36,6 +40,9 @@ class MenuScene extends Phaser.Scene {
     // Play Button
     playBtn.setInteractive({ useHandCursor: true })
       .on('pointerover', () => {
+        // Create new sound instance everytime so overlaps is possible and no popping
+        this.sound.add('nav', { volume: 0.2 }).play();
+        // hoverSound.play();
         wings.x = 260;
         wings.y = 550;
       })
@@ -43,6 +50,8 @@ class MenuScene extends Phaser.Scene {
         wings.y = -100;
       })
       .once('pointerdown', () => {
+        this.sound.add('nav', { volume: 0.4 }).play();
+        // clickSound.play();
         playBtn.destroy();
         creditsBtn.destroy();
         this.scene.start('intro');
@@ -60,6 +69,8 @@ class MenuScene extends Phaser.Scene {
     // Credits Button
     creditsBtn.setInteractive({ useHandCursor: true })
       .on('pointerover', () => {
+        this.sound.add('nav', { volume: 0.2 }).play();
+        // hoverSound.play();
         wings.x = 290;
         wings.y = 605;
       })
@@ -67,6 +78,8 @@ class MenuScene extends Phaser.Scene {
         wings.y = -100;
       })
       .once('pointerdown', () => {
+        this.sound.add('nav', { volume: 0.4 }).play();
+        // clickSound.play();
         playBtn.destroy();
         creditsBtn.destroy();
         this.scene.start('credits');

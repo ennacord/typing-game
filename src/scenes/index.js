@@ -9,6 +9,12 @@ import CharactersPng from '../assets/chars.png';
 import UIpng from '../assets/ui.png';
 import UIjson from '../assets/ui.json';
 
+import bgmMp3 from '../assets/audio/bgm.mp3';
+import correctMp3 from '../assets/audio/correct.mp3';
+import mistakeMp3 from '../assets/audio/mistake.mp3';
+import navMp3 from '../assets/audio/nav.mp3';
+import touchMp3 from '../assets/audio/touch.mp3';
+
 import SENPAIS from '../data/senpais';
 
 class IndexScene extends Phaser.Scene {
@@ -22,6 +28,13 @@ class IndexScene extends Phaser.Scene {
     // Assets
     this.load.spritesheet('chars', CharactersPng, { frameWidth: 300, frameHeight: 300 });
     this.load.atlas('ui', UIpng, UIjson);
+
+    // Audio
+    this.load.audio('bgm', bgmMp3);
+    this.load.audio('correct', correctMp3);
+    this.load.audio('mistake', mistakeMp3);
+    this.load.audio('nav', navMp3);
+    this.load.audio('touch', touchMp3);
 
     // Scenes
     this.scene.add('menu', MenuScene);
@@ -71,6 +84,11 @@ class IndexScene extends Phaser.Scene {
 
     // Start game on touch
     this.input.once('pointerdown', () => {
+      this.sound.add('touch')
+        .once('complete', () => {
+          this.sound.add('bgm', { loop: true }).play();
+        })
+        .play();
       this.scene.start('menu');
     });
   }

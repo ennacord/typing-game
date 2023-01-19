@@ -35,7 +35,7 @@ class PlayScene extends Phaser.Scene {
     this.sayText = this.add.text(540, 340, '', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
       fontSize: 24,
-      color: '#6d3e4b',
+      color: '#ff8a7c',
       align: 'left',
       fixedWidth: 270,
       wordWrap: { width: 270, useAdvancedWrap: true },
@@ -208,6 +208,7 @@ class PlayScene extends Phaser.Scene {
     // Actual mistake
     this.coin -= 100;
     this.coinTxt.setText(String(this.coin));
+    this.sound.add('mistake', { volume: 0.5 }).play();
 
     // Deduct animation
     const coinDeduct = this.add.text(1140, 400, '-100', {
@@ -309,6 +310,7 @@ class PlayScene extends Phaser.Scene {
     const reward = 200;
     this.coin += reward;
     this.coinTxt.setText(String(this.coin));
+    this.sound.add('correct', { volume: 0.7 }).play();
 
     // Reward animation
     const coinReward = this.add.text(1140, 400, `+${reward}`, {
