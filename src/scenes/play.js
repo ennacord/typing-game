@@ -15,7 +15,7 @@ class PlayScene extends Phaser.Scene {
       .strokeRoundedRect(0, 0, 900, 640, 20);
 
     // Main Text
-    this.mainText = this.add.text(90, 200, '', {
+    this.mainText = this.add.text(90, 200, '[ TYPING START ]', {
       fontFamily: 'VT323, Arial, Helvetica, sans-serif',
       fontSize: 80,
       color: '#6d3e4b',
@@ -146,6 +146,7 @@ class PlayScene extends Phaser.Scene {
       } else {
         // Correct ongoing input
         this.sayText.setText(this.currentPhrase);
+        this.sound.add('nav', { volume: 0.05 }).play();
         // Start timer only on their first key
         if (!this.timer) {
           this.timer = this.time.addEvent({
@@ -194,8 +195,14 @@ class PlayScene extends Phaser.Scene {
   newPhrase() {
     const phrasePool = PHRASES[this.difficulty];
     this.targetPhrase = phrasePool[Math.floor(Math.random() * phrasePool.length)];
-    this.mainText.setText(this.targetPhrase);
-    this.mainText.y = 200 - (this.mainText.displayHeight / 2);
+    this.mainText.setText('');
+    this.time.addEvent({
+      delay: 200,
+      callback: () => {
+        this.mainText.setText(this.targetPhrase);
+        this.mainText.y = 200 - (this.mainText.displayHeight / 2);
+      },
+    });
   }
 
   wrongInput() {
