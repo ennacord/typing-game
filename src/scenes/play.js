@@ -317,7 +317,7 @@ class PlayScene extends Phaser.Scene {
     const reward = 200;
     this.coin += reward;
     this.coinTxt.setText(String(this.coin));
-    this.sound.add('correct', { volume: 0.7 }).play();
+    this.sound.add('correct', { volume: 0.5 }).play();
 
     // Reward animation
     const coinReward = this.add.text(1140, 400, `+${reward}`, {
