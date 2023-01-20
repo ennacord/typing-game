@@ -92,8 +92,30 @@ class CreditsScene extends Phaser.Scene {
     });
 
     this.add.sprite(150, 500, 'ui', 'frame').setScale(0.66);
+    this.add.sprite(150, 500, 'ui', 'av_heko').setScale(0.4);
+    this.add.text(220, 470, 'heko @hekontent', {
+      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
+      fontSize: 30,
+      color: '#6d3e4b',
+    });
+    this.add.text(220, 500, 'Background Music and Sound Effects', {
+      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
+      fontSize: 26,
+      color: '#6d3e4b',
+    });
 
     this.add.sprite(150, 610, 'ui', 'frame').setScale(0.66);
+    this.add.sprite(150, 610, 'ui', 'av_elodie').setScale(0.4);
+    this.add.text(220, 580, 'Elodie @ElodieFollows', {
+      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
+      fontSize: 30,
+      color: '#6d3e4b',
+    });
+    this.add.text(220, 610, 'Sound Effects', {
+      fontFamily: 'VT323, Arial, Helvetica, sans-serif',
+      fontSize: 26,
+      color: '#6d3e4b',
+    });
   }
 }
 
